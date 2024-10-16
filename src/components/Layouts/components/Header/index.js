@@ -1,19 +1,28 @@
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import classNames from 'classnames/bind'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
+    faCircleHalfStroke,
     faCircleQuestion,
     faCircleXmark,
+    faCoins,
     faEarthAsia,
     faEllipsisVertical,
+    faGear,
     faKeyboard,
     faMagnifyingGlass,
+    faSignOut,
     faSpinner,
+    faUser,
 } from '@fortawesome/free-solid-svg-icons'
-import Tippy from '@tippyjs/react/headless'
+import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
+import HeadlessTippy from '@tippyjs/react/headless'
+import Tippy from '@tippyjs/react'
+import 'tippy.js/dist/tippy.css'
 
 import styles from './Header.module.scss'
 import images from '~/assets/images/logo.svg'
+import rosie from '~/assets/images/rosie.jpg'
 
 import { Wrapper as PopperWrapper } from '~/components/Popper'
 import AccountItem from '~/components/AccountItem'
@@ -51,6 +60,27 @@ const MENU_ITEMS = [
         icon: <FontAwesomeIcon icon={faKeyboard} />,
         title: 'Keyboard shortcuts',
     },
+    {
+        icon: <FontAwesomeIcon icon={faCircleHalfStroke} />,
+        title: 'Dark mode',
+        children: {
+            title: 'Dark mode',
+            data: [
+                {
+                    type: 'auto',
+                    title: 'Auto',
+                },
+                {
+                    type: 'dark',
+                    title: 'Dark mode',
+                },
+                {
+                    type: 'light',
+                    title: 'Light mode',
+                },
+            ],
+        },
+    },
 ]
 
 function Header() {
@@ -70,6 +100,32 @@ function Header() {
         }
     }
 
+    const currentUser = true
+    const userMenu = [
+        {
+            icon: <FontAwesomeIcon icon={faUser} />,
+            title: 'View profile',
+            to: '/@roses_are_rosie',
+        },
+        {
+            icon: <FontAwesomeIcon icon={faCoins} />,
+            title: 'Get coins',
+            to: '/coin',
+        },
+        {
+            icon: <FontAwesomeIcon icon={faGear} />,
+            title: 'Settings',
+            to: '/settings',
+        },
+        ...MENU_ITEMS,
+        {
+            icon: <FontAwesomeIcon icon={faSignOut} />,
+            title: 'Log out',
+            to: '/logout',
+            separate: true,
+        },
+    ]
+
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
@@ -77,7 +133,7 @@ function Header() {
                     <img src={images} alt="TikTok" height="42" width="118" />
                 </div>
                 <div>
-                    <Tippy
+                    <HeadlessTippy
                         interactive
                         visible={searchResult.length > 0}
                         render={(attrs) => (
@@ -103,16 +159,31 @@ function Header() {
                                 <FontAwesomeIcon icon={faMagnifyingGlass} />
                             </button>
                         </div>
-                    </Tippy>
+                    </HeadlessTippy>
                 </div>
-                <div className={cx('action')}>
-                    <Button text>Upload</Button>
-                    <Button primary>Log in</Button>
-
-                    <Menu items={MENU_ITEMS} onClick={handleMenuClick}>
-                        <button className={cx('more-btn')}>
-                            <FontAwesomeIcon icon={faEllipsisVertical} />
-                        </button>
+                <div className={cx('actions')}>
+                    {currentUser ? (
+                        <>
+                            <Tippy delay={[0, 200]} content="Message" placement="bottom">
+                                <button className={cx('action-btn')}>
+                                    <FontAwesomeIcon icon={faPaperPlane} />
+                                </button>
+                            </Tippy>
+                        </>
+                    ) : (
+                        <Fragment>
+                            <Button text>Upload</Button>
+                            <Button primary>Log in</Button>
+                        </Fragment>
+                    )}
+                    <Menu items={currentUser ? userMenu : MENU_ITEMS} onClick={handleMenuClick}>
+                        {currentUser ? (
+                            <img src={rosie} className={cx('user-avatar')} alt="Park Chaeyoung" />
+                        ) : (
+                            <button className={cx('more-btn')}>
+                                <FontAwesomeIcon icon={faEllipsisVertical} />
+                            </button>
+                        )}
                     </Menu>
                 </div>
             </div>
