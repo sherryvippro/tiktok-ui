@@ -27,7 +27,7 @@ import Search from '../Search'
 import config from '~/config'
 
 const cx = classNames.bind(styles)
-const currentUser = true
+const currentUser = false
 
 const MENU_ITEMS = [
     {
