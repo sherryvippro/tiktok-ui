@@ -148,7 +148,12 @@ function Header() {
                     )}
                     <Menu items={currentUser ? userMenu : MENU_ITEMS} onClick={handleMenuClick}>
                         {currentUser ? (
-                            <Image className={cx('user-avatar')} src={rosie} alt="Park Chaeyoung" fallback="" />
+                            <Image
+                                className={cx('user-avatar')}
+                                src={rosie}
+                                alt="Park Chaeyoung"
+                                fallback=""
+                            />
                         ) : (
                             <button className={cx('more-btn')}>
                                 <FontAwesomeIcon icon={faEllipsisVertical} />

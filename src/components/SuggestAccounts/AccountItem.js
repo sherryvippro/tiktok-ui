@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 import Tippy from '@tippyjs/react/headless'
 
-import rosie from '~/assets/images/rosie.jpg'
+import { avatar } from '~/assets/images'
 import { Wrapper as PopperWrapper } from '../Popper'
 import AccountPreview from './AccountPreview'
 
@@ -22,9 +22,15 @@ function AccountItem() {
     }
     return (
         <div>
-            <Tippy interactive delay={[800, 0]} render={renderPreview} placement="bottom" offset={[-25, 3]}>
+            <Tippy
+                interactive
+                delay={[800, 0]}
+                render={renderPreview}
+                placement="bottom"
+                offset={[-25, 3]}
+            >
                 <div className={cx('account-item')}>
-                    <img className={cx('avatar')} src={rosie} alt="" />
+                    <img className={cx('avatar')} src={avatar.avatar} alt="" />
                     <div className={cx('item-info')}>
                         <p className={cx('nickname')}>
                             <strong>roses_are_rosie</strong>

@@ -1,5 +1,31 @@
 .wrapper {
-    width: 356px;
-    padding: 20px 0 26px 8 px;
-    margin-left: -10px;
+    width: 240px;
+}
+
+.scrollable {
+    overflow: hidden;
+    overscroll-behavior-y: contain;
+    perspective: 1px;
+    transform-style: preserve-3d;
+    perspective-origin: right top;
+    top: 60px;
+    bottom: 0px;
+    width: 240px;
+    background: rgb(255, 255, 255);
+    position: fixed;
+
+    &:hover {
+        overflow-y: auto;
+        // transition: opacity ease-in-out 200ms;
+    }
+}
+
+.content {
+    padding: 20px 0px 26px 8px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-align: stretch;
+    align-items: stretch;
+    min-height: 100%;
 }

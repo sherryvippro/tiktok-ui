@@ -14,23 +14,43 @@ import {
 import SuggestAccounts from '~/components/SuggestAccounts'
 
 const cx = classNames.bind(styles)
+const currentUser = true
 
 function Sidebar() {
     return (
         <aside className={cx('wrapper')}>
-            <Menu>
-                <MenuItem tilte="For You" to={config.routes.home} icon={<HomeIcon />} activeIcon={<HomeActiveIcon />} />
-                <MenuItem
-                    tilte="Following"
-                    to={config.routes.following}
-                    icon={<FollowingIcon />}
-                    activeIcon={<FollowingActiveIcon />}
-                />
-                <MenuItem tilte="Live" to={config.routes.live} icon={<LiveIcon />} activeIcon={<LiveActiveIcon />} />
-            </Menu>
-
-            <SuggestAccounts label="Suggest accounts" />
-            <SuggestAccounts label="Following accounts" />
+            <div className={cx('scrollable')}>
+                <div className={cx('content')}>
+                    <Menu>
+                        <MenuItem
+                            tilte="For You"
+                            to={config.routes.home}
+                            icon={<HomeIcon />}
+                            activeIcon={<HomeActiveIcon />}
+                        />
+                        <MenuItem
+                            tilte="Following"
+                            to={config.routes.following}
+                            icon={<FollowingIcon />}
+                            activeIcon={<FollowingActiveIcon />}
+                        />
+                        <MenuItem
+                            tilte="Live"
+                            to={config.routes.live}
+                            icon={<LiveIcon />}
+                            activeIcon={<LiveActiveIcon />}
+                        />
+                    </Menu>
+                    {currentUser ? (
+                        <div>
+                            <SuggestAccounts label="Suggest accounts" />
+                            <SuggestAccounts label="Following accounts" />
+                        </div>
+                    ) : (
+                        <SuggestAccounts label="Suggest accounts" />
+                    )}
+                </div>
+            </div>
         </aside>
     )
 }

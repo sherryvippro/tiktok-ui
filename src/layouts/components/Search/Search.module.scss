@@ -1,11 +1,19 @@
+.wrapper {
+    position: relative;
+    min-width: 200px;
+    padding: 0px 8px;
+    width: 516px;
+    transform: translateX(110px);
+}
+
 .search,
 .search-result {
-    width: 361px;
+    width: 100%;
 }
 
 .search {
     position: relative;
-    width: 361px;
+    width: 100%;
     height: var(--search-height);
     padding-left: 16px;
     display: flex;

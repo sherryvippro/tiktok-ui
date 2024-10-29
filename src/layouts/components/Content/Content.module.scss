@@ -1,0 +1,43 @@
+// .wrapper {
+//     display: flex;
+//     align-items: end;
+// }
+
+.wrapper {
+    padding-left: 66px;
+    margin: 0px auto;
+    position: relative;
+    transition-duration: 150ms;
+    transition-timing-function: linear;
+    transition-property: grid, max-width, height;
+    transition-delay: 0ms, 0ms, 0ms;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: end;
+    align-items: end;
+    // grid-template:
+    //     '. . . .' [card-content]
+    //     '. card-content . action-bar' 1fr
+    //     '. ad-cta . .' / [dead-space] 64px
+    //     [card-content] 1fr 16px [action-bar] 48px;
+    // grid-template-columns: auto;
+    width: 100%;
+    max-width: calc(76.25px + 56.25vh);
+}
+
+// .wrapper-video {
+//     position: relative;
+//     box-sizing: border-box;
+//     background-size: cover;
+//     cursor: pointer;
+//     aspect-ratio: 0.5625 / 1;
+//     grid-area: card-content;
+//     max-height: calc(-92px + 100vh);
+// }
+
+.wrapper-icon {
+    display: flex;
+    flex-direction: column;
+    margin-left: 15px;
+}
