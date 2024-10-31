@@ -8,12 +8,12 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 
 const cx = classNames.bind(styles)
 
-function AccountPreview() {
+function AccountPreview({ primary, outline }) {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('header')}>
                 <img className={cx('avatar')} src={rosie} alt="roses_are_rosie" />
-                <Button className={cx('follow-btn')} primary>
+                <Button className={cx('follow-btn')} primary={primary} outline={outline}>
                     Follow
                 </Button>
             </div>

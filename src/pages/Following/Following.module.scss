@@ -1,0 +1,28 @@
+.wrapper {
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    max-height: calc(-60px + 100vh);
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+.container {
+    height: calc(-60px + 100vh);
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 1rem;
+    margin: 0px auto;
+    transition-property: margin, width, padding;
+    transition-duration: 300ms;
+    transition-timing-function: linear;
+    overflow: hidden clip;
+    scroll-snap-stop: always;
+    scroll-snap-align: start center;
+    padding-inline-end: 240px;
+}

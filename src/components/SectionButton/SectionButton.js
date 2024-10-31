@@ -2,30 +2,38 @@ import classNames from 'classnames/bind'
 import styles from './SectionButton.module.scss'
 import { Link } from 'react-router-dom'
 import config from '~/config'
-import Tippy from '@tippyjs/react'
+import Tippy from '@tippyjs/react/headless'
 import { Wrapper as PopperWrapper } from '../Popper'
 import AccountPreview from '../SuggestAccounts/AccountPreview'
 
 const cx = classNames.bind(styles)
 
-function SectionButton({ avt, icon, children, onClick, ...passProps }) {
+function SectionButton({
+    avt,
+    icon,
+    onClickFollowButton,
+    onClickLikeButton,
+    children,
+    click,
+    like,
+}) {
     const renderPreview = () => {
         return (
             <div tabIndex="-1">
                 <PopperWrapper>
-                    <AccountPreview />
+                    <AccountPreview outline />
                 </PopperWrapper>
             </div>
         )
     }
     return (
-        <button className={cx('wrapper')} {...passProps}>
+        <button className={cx('wrapper')}>
             {avt ? (
                 <div className={cx('section-avatar')}>
                     <div>
                         <Tippy
                             interactive
-                            delay={[800, 0]}
+                            delay={[700, 500]}
                             render={renderPreview}
                             placement="bottom-start"
                             offset={[-5, 20]}
@@ -35,11 +43,21 @@ function SectionButton({ avt, icon, children, onClick, ...passProps }) {
                             </Link>
                         </Tippy>
                     </div>
-                    <span className={cx('icon-avatar')}>{icon}</span>
+                    <span
+                        onClick={onClickFollowButton}
+                        className={click ? cx('icon-check') : cx('icon-avatar')}
+                    >
+                        {children}
+                    </span>
                 </div>
             ) : (
-                <div className={cx('section-button')}>
-                    <span className={cx('icon')}>{icon}</span>
+                <div onClick={onClickLikeButton} className={cx('section-button')}>
+                    {like ? (
+                        <span className={cx('active-icon')}>{icon}</span>
+                    ) : (
+                        <span className={cx('icon')}>{icon}</span>
+                    )}
+
                     <strong className={cx('label')}>{children}</strong>
                 </div>
             )}
