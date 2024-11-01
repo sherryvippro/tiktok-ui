@@ -75,12 +75,17 @@
     transform: translate(-50%, 50%);
 }
 
-.active-icon {
+.love,
+.comment,
+.share {
     color: red;
 }
 
-.icon,
-.active-icon {
+.favorite {
+    color: yellow;
+}
+
+.icon {
     display: flex;
     -webkit-box-pack: center;
     justify-content: center;

@@ -11,11 +11,14 @@ const cx = classNames.bind(styles)
 function SectionButton({
     avt,
     icon,
+    onClickButton,
     onClickFollowButton,
-    onClickLikeButton,
     children,
     click,
-    like,
+    love,
+    comment,
+    favorite,
+    share,
 }) {
     const renderPreview = () => {
         return (
@@ -26,6 +29,14 @@ function SectionButton({
             </div>
         )
     }
+
+    const classes = cx('section-button', {
+        love: love,
+        comment: comment,
+        favorite: favorite,
+        share: share,
+    })
+
     return (
         <button className={cx('wrapper')}>
             {avt ? (
@@ -51,13 +62,8 @@ function SectionButton({
                     </span>
                 </div>
             ) : (
-                <div onClick={onClickLikeButton} className={cx('section-button')}>
-                    {like ? (
-                        <span className={cx('active-icon')}>{icon}</span>
-                    ) : (
-                        <span className={cx('icon')}>{icon}</span>
-                    )}
-
+                <div className={classes} onClick={onClickButton}>
+                    <span className={cx('icon')}>{icon}</span>
                     <strong className={cx('label')}>{children}</strong>
                 </div>
             )}

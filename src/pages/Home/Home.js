@@ -22,6 +22,18 @@ function Home() {
             <article className={cx('container')}>
                 <Content />
             </article>
+            <article className={cx('container')}>
+                <Content />
+            </article>
+            <article className={cx('container')}>
+                <Content />
+            </article>
+            <article className={cx('container')}>
+                <Content />
+            </article>
+            <article className={cx('container')}>
+                <Content />
+            </article>
         </div>
     )
 }

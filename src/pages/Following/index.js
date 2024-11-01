@@ -8,19 +8,19 @@ function Following() {
     return (
         <div className={cx('wrapper')}>
             <article className={cx('container')}>
-                <Content />
+                <Content followed={true} />
             </article>
             <article className={cx('container')}>
-                <Content />
+                <Content followed={true} />
             </article>
             <article className={cx('container')}>
-                <Content />
+                <Content followed={true} />
             </article>
             <article className={cx('container')}>
-                <Content />
+                <Content followed={true} />
             </article>
             <article className={cx('container')}>
-                <Content />
+                <Content followed={true} />
             </article>
         </div>
     )

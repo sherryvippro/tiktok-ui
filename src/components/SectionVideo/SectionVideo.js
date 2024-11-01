@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import classNames from 'classnames/bind'
 import styles from './SectionVideo.module.scss'
 import Tippy from '@tippyjs/react/headless'
@@ -21,15 +21,60 @@ const cx = classNames.bind(styles)
 
 function Video() {
     const [clickOnVideo, setClickOnVideo] = useState(false)
-    const [clickOnIcon, setClickOnIcon] = useState(true)
-    const [isOverflowed, setIsOverflowed] = useState(false)
-    const [isExpanded, setExpanded] = useState(false)
+    const [clickOnVolumeIcon, setClickOnVolumeIcon] = useState(false)
+    const [more, setMore] = useState(false)
+    const [inView, setInView] = useState(false)
 
     const videoRef = useRef()
-    const descriptionRef = useRef()
 
-    const handleOnClick = () => {
-        setClickOnVideo(!clickOnVideo)
+    const description =
+        '48 hours in Paris Paris Paris Paris Paris Paris Paris Paris Paris Paris Paris Paris Paris'
+    const minLengthDescription = 60
+
+    useEffect(() => {
+        const currentVideo = videoRef.current
+        const observer = new IntersectionObserver(
+            (entries) => {
+                const [entry] = entries
+                // check video in view
+                setInView(entry.isIntersecting)
+            },
+            {
+                // video in view 50%
+                threshold: 0.5,
+            },
+        )
+
+        // video element tracking
+        if (currentVideo) {
+            observer.observe(currentVideo)
+        }
+
+        // cleanup
+        return () => {
+            if (currentVideo) {
+                observer.unobserve(currentVideo)
+            }
+        }
+    }, [])
+
+    useEffect(() => {
+        if (inView) {
+            if (clickOnVolumeIcon) {
+                videoRef.current.muted = false
+                console.log('ummuted')
+            } else {
+                videoRef.current.muted = true
+                console.log('muted')
+            }
+            videoRef.current.play()
+        } else {
+            videoRef.current.pause()
+        }
+    }, [inView, clickOnVolumeIcon])
+
+    const handleOnClickVideo = () => {
+        setClickOnVideo((prev) => !prev)
 
         if (clickOnVideo) {
             videoRef.current.play()
@@ -38,18 +83,17 @@ function Video() {
         }
     }
 
-    const handleOnClickButton = () => {
-        setExpanded(!isExpanded)
+    const handleOnClickMoreButton = () => {
+        setMore((prev) => !prev)
     }
 
-    const handleOnClickIcon = () => {
-        setClickOnIcon(!clickOnIcon)
-        if (clickOnIcon) {
+    const handleOnClickVolumeIcon = () => {
+        setClickOnVolumeIcon((prev) => !prev)
+
+        if (clickOnVolumeIcon) {
             videoRef.current.muted = true
-            console.log('muted')
         } else {
             videoRef.current.muted = false
-            console.log('unmuted')
         }
     }
 
@@ -82,16 +126,17 @@ function Video() {
         <div className={cx('wrapper')}>
             <video
                 ref={videoRef}
-                onClick={handleOnClick}
+                onClick={handleOnClickVideo}
                 className={cx('video')}
                 src={video.karina}
                 autoPlay
+                muted
                 loop
             />
             <div className={cx('media-icon')}>
                 <div className={cx('icon')}>
-                    <div className={cx('volume-icon')} onClick={handleOnClickIcon}>
-                        {clickOnIcon ? (
+                    <div className={cx('volume-icon')} onClick={handleOnClickVolumeIcon}>
+                        {clickOnVolumeIcon ? (
                             <FontAwesomeIcon icon={faVolumeHigh} />
                         ) : (
                             <FontAwesomeIcon icon={faVolumeXmark} />
@@ -126,19 +171,15 @@ function Video() {
                 <div className={cx('description-wrapper')}>
                     <div className={cx('description-container')}>
                         <div className={cx('multiline-text')}>
-                            <h1
-                                ref={descriptionRef}
-                                className={cx('description', { expand: isExpanded })}
-                            >
-                                48 hours in paris paris paris paris paris paris paris paris paris
-                                paris
+                            <h1 className={cx('description')}>
+                                {!more && description.length > minLengthDescription
+                                    ? description.substring(0, 50).concat('...')
+                                    : description}
                             </h1>
                         </div>
-                        {!isOverflowed && (
-                            <button className={cx('more-btn')} onClick={handleOnClickButton}>
-                                {isExpanded ? 'less' : 'more'}
-                            </button>
-                        )}
+                        <button className={cx('more-btn')} onClick={handleOnClickMoreButton}>
+                            {more ? 'less' : 'more'}
+                        </button>
                     </div>
                 </div>
                 <div className={cx('music-wrapper')}>
