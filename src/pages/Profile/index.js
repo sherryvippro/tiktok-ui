@@ -1,5 +1,11 @@
+import LogIn from '~/components/LogIn/LogIn'
+
 function Profile() {
-    return <h2>Profile Page</h2>
+    return (
+        <div>
+            <LogIn />
+        </div>
+    )
 }
 
 export default Profile

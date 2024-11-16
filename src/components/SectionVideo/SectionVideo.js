@@ -19,7 +19,7 @@ import { faFlag } from '@fortawesome/free-regular-svg-icons'
 
 const cx = classNames.bind(styles)
 
-function Video() {
+function Video({ isMuted }) {
     const [clickOnVideo, setClickOnVideo] = useState(false)
     const [clickOnVolumeIcon, setClickOnVolumeIcon] = useState(false)
     const [more, setMore] = useState(false)
@@ -130,7 +130,6 @@ function Video() {
                 className={cx('video')}
                 src={video.karina}
                 autoPlay
-                muted
                 loop
             />
             <div className={cx('media-icon')}>

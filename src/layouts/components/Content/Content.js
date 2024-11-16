@@ -16,7 +16,7 @@ import { useState } from 'react'
 
 const cx = classNames.bind(styles)
 
-function Content({ followed = false }) {
+function Content({ followed = false, isMuted }) {
     const [click, setClick] = useState(false)
     const [like, setLike] = useState(false)
     const [comment, setComment] = useState(false)

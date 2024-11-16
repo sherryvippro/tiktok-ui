@@ -1,0 +1,117 @@
+.wrapper {
+    border-radius: 8px;
+    transition: 300ms cubic-bezier(0.075, 0.82, 0.165, 1);
+    transform: none;
+    margin: auto;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    height: 642px;
+    background-color: rgb(255, 255, 255);
+    width: 483px;
+    height: 100%;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.box-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 363px;
+    padding: 0px 0px 64px;
+}
+
+.title {
+    color: rgb(22, 24, 35);
+    font-family: var(--font-family);
+    font-size: 33px;
+    margin: 64px auto 16px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.container {
+    font-weight: 600;
+    font-size: 15px;
+    border-radius: 8px;
+    padding: 0px 12px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    height: 44px;
+    position: relative;
+    cursor: pointer;
+    margin-bottom: 12px;
+    word-break: keep-all;
+    white-space: nowrap;
+    background: rgb(255, 255, 255);
+    animation: auto ease 0s 1 normal none running none;
+    border-width: 1px;
+    border-style: solid;
+    color: rgb(22, 24, 35);
+    border-color: rgba(22, 24, 35, 0.12);
+
+    &:hover {
+        border-color: rgb(208, 209, 211);
+        background-color: rgb(248, 248, 248);
+    }
+}
+
+.icon {
+    left: 12px;
+    font-size: 20px;
+    position: absolute;
+    display: flex;
+}
+
+.text {
+    width: calc(100% - 64px);
+    text-align: center;
+}
+
+.agreement {
+    width: 100%;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    background: rgb(255, 255, 255);
+    padding: 16px 30px;
+    margin-bottom: unset;
+}
+
+.text-agreement {
+    color: rgba(22, 24, 35, 0.5);
+    font-size: 12px;
+    text-align: center;
+    line-height: 15px;
+    width: 337px;
+}
+
+.link {
+    color: rgb(22, 24, 35);
+    font-weight: 600;
+}
+
+.bottom {
+    color: rgb(22, 24, 35);
+    height: 64px;
+    border-top: 0.5px solid rgba(22, 24, 35, 0.12);
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 0px;
+    -webkit-box-align: center;
+    align-items: center;
+    font-size: 15px;
+    line-height: 18px;
+    width: 483px;
+}
