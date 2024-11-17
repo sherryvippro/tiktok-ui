@@ -16,7 +16,7 @@ import { useState } from 'react'
 
 const cx = classNames.bind(styles)
 
-function Content({ followed = false, isMuted }) {
+function Content({ followed = false, isMuted, toggleMute }) {
     const [click, setClick] = useState(false)
     const [like, setLike] = useState(false)
     const [comment, setComment] = useState(false)
@@ -41,7 +41,7 @@ function Content({ followed = false, isMuted }) {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('wrapper-video')}>
-                <Video />
+                <Video isMuted={isMuted} toggleMute={toggleMute} />
             </div>
 
             <div className={cx('wrapper-icon')}>

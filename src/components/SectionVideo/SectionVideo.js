@@ -19,9 +19,8 @@ import { faFlag } from '@fortawesome/free-regular-svg-icons'
 
 const cx = classNames.bind(styles)
 
-function Video({ isMuted }) {
+function Video({ isMuted, toggleMute }) {
     const [clickOnVideo, setClickOnVideo] = useState(false)
-    const [clickOnVolumeIcon, setClickOnVolumeIcon] = useState(false)
     const [more, setMore] = useState(false)
     const [inView, setInView] = useState(false)
 
@@ -60,18 +59,19 @@ function Video({ isMuted }) {
 
     useEffect(() => {
         if (inView) {
-            if (clickOnVolumeIcon) {
-                videoRef.current.muted = false
-                console.log('ummuted')
-            } else {
+            if (isMuted) {
                 videoRef.current.muted = true
                 console.log('muted')
+            } else {
+                videoRef.current.muted = false
+                console.log('unmuted')
             }
             videoRef.current.play()
         } else {
             videoRef.current.pause()
+            videoRef.current.currentTime = 0
         }
-    }, [inView, clickOnVolumeIcon])
+    }, [inView, isMuted])
 
     const handleOnClickVideo = () => {
         setClickOnVideo((prev) => !prev)
@@ -85,16 +85,6 @@ function Video({ isMuted }) {
 
     const handleOnClickMoreButton = () => {
         setMore((prev) => !prev)
-    }
-
-    const handleOnClickVolumeIcon = () => {
-        setClickOnVolumeIcon((prev) => !prev)
-
-        if (clickOnVolumeIcon) {
-            videoRef.current.muted = true
-        } else {
-            videoRef.current.muted = false
-        }
     }
 
     const renderMoreButton = () => {
@@ -131,11 +121,12 @@ function Video({ isMuted }) {
                 src={video.karina}
                 autoPlay
                 loop
+                muted={isMuted}
             />
             <div className={cx('media-icon')}>
                 <div className={cx('icon')}>
-                    <div className={cx('volume-icon')} onClick={handleOnClickVolumeIcon}>
-                        {clickOnVolumeIcon ? (
+                    <div className={cx('volume-icon')} onClick={toggleMute}>
+                        {!isMuted ? (
                             <FontAwesomeIcon icon={faVolumeHigh} />
                         ) : (
                             <FontAwesomeIcon icon={faVolumeXmark} />

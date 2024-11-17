@@ -13,6 +13,7 @@ const defaultfn = () => {}
 
 function Menu({ children, items = [], hideOnClick = false, onChange = defaultfn }) {
     const [history, setHistory] = useState([{ data: items }])
+    const [title, setTitle] = useState('')
     const current = history[history.length - 1]
 
     const renderItems = () => {
@@ -26,6 +27,7 @@ function Menu({ children, items = [], hideOnClick = false, onChange = defaultfn 
                     onClick={() => {
                         if (isParent) {
                             setHistory((prev) => [...prev, item.children])
+                            setTitle(item.title)
                         } else {
                             onChange(item)
                         }
@@ -53,7 +55,7 @@ function Menu({ children, items = [], hideOnClick = false, onChange = defaultfn 
             render={(attrs) => (
                 <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
                     <PopperWrapper className={cx('menu-popper')}>
-                        {history.length > 1 && <Header title="Language" onBack={handleBack} />}
+                        {history.length > 1 && <Header title={title} onBack={handleBack} />}
                         <div className={cx('menu-scrollable')}>{renderItems()}</div>
                     </PopperWrapper>
                 </div>

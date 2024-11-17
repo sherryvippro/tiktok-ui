@@ -29,3 +29,34 @@
     align-items: stretch;
     min-height: 100%;
 }
+
+.footer {
+    position: relative;
+    padding-top: 16px;
+    padding-left: 16px;
+}
+
+.header,
+.header-last {
+    margin-bottom: 15px;
+    font-size: 15px;
+    line-height: 22px;
+    margin-top: 0px;
+    cursor: pointer;
+    color: rgba(22, 24, 35, 0.5);
+    font-weight: 700;
+}
+
+.header-last {
+    margin-bottom: 0px;
+}
+
+.copyright {
+    color: rgba(22, 24, 35, 0.5);
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    display: inline-block;
+    margin-right: 6px;
+    margin-top: 5px;
+}

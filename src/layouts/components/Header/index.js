@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import classNames from 'classnames/bind'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -25,9 +25,13 @@ import Button from '~/components/Button'
 import Menu from '~/components/Popper/Menu'
 import Search from '../Search'
 import config from '~/config'
+import LogIn from '~/components/LogIn/LogIn'
+import ReactModal from 'react-modal'
 
 const cx = classNames.bind(styles)
-const currentUser = false
+
+// This is needed so screen readers don't see main content when modal is opened
+ReactModal.setAppElement('#root')
 
 const MENU_ITEMS = [
     {
@@ -82,6 +86,9 @@ const MENU_ITEMS = [
 ]
 
 function Header() {
+    const [currentUser, setCurrentUser] = useState(false)
+    const [isModalOpen, setIsModalOpen] = useState(false)
+
     const handleMenuClick = (menuItem) => {
         switch (menuItem.type) {
             case 'language':
@@ -89,6 +96,14 @@ function Header() {
                 break
             default:
         }
+    }
+
+    const handleOpenModal = () => {
+        setIsModalOpen(true)
+    }
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false)
     }
 
     const userMenu = [
@@ -143,7 +158,9 @@ function Header() {
                         </>
                     ) : (
                         <Fragment>
-                            <Button primary>Log in</Button>
+                            <Button primary onClick={handleOpenModal}>
+                                Log in
+                            </Button>
                         </Fragment>
                     )}
                     <Menu items={currentUser ? userMenu : MENU_ITEMS} onClick={handleMenuClick}>
@@ -161,6 +178,13 @@ function Header() {
                         )}
                     </Menu>
                 </div>
+                <ReactModal
+                    isOpen={isModalOpen}
+                    className={cx('modal')}
+                    overlayClassName={cx('overlay')}
+                >
+                    <LogIn onClick={handleCloseModal} />
+                </ReactModal>
             </div>
         </header>
     )

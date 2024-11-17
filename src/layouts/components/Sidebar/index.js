@@ -43,12 +43,18 @@ function Sidebar() {
                     </Menu>
                     {currentUser ? (
                         <div>
-                            <SuggestAccounts label="Suggest accounts" />
+                            {/* <SuggestAccounts label="Suggest accounts" /> */}
                             <SuggestAccounts label="Following accounts" />
                         </div>
                     ) : (
-                        <SuggestAccounts label="Suggest accounts" />
+                        <SuggestAccounts label="Following accounts" />
                     )}
+                </div>
+                <div className={cx('footer')}>
+                    <h4 className={cx('header')}>Company</h4>
+                    <h4 className={cx('header')}>Program</h4>
+                    <h4 className={cx('header-last')}>Terms & Policies</h4>
+                    <span className={cx('copyright')}>© 2024 TikTok</span>
                 </div>
             </div>
         </aside>
