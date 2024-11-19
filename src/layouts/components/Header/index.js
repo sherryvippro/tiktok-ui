@@ -87,23 +87,44 @@ const MENU_ITEMS = [
 
 function Header() {
     const [currentUser, setCurrentUser] = useState(false)
-    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [isModalLoginOpen, setIsModalLoginOpen] = useState(false)
+    const [isModalLogoutOpen, setIsModalLogoutOpen] = useState(false)
+
+    // useEffect(() => {
+    //     if (currentUser) {
+    //         console.log('User is logged in')
+    //     } else {
+    //         console.log('User is logged out')
+    //     }
+    // }, [currentUser])
 
     const handleMenuClick = (menuItem) => {
         switch (menuItem.type) {
             case 'language':
                 // Handle change language
                 break
+            case 'logout':
+                handleOpenModalLogout()
+                break
             default:
         }
     }
 
-    const handleOpenModal = () => {
-        setIsModalOpen(true)
+    const handleOpenModalLogin = () => {
+        setIsModalLoginOpen(true)
     }
 
-    const handleCloseModal = () => {
-        setIsModalOpen(false)
+    const handleCloseModalLogin = () => {
+        setIsModalLoginOpen(false)
+    }
+
+    const handleOpenModalLogout = () => {
+        setIsModalLogoutOpen(true)
+    }
+
+    const hanldeOnClickUserName = () => {
+        setCurrentUser((prev) => !prev)
+        setIsModalLoginOpen(false)
     }
 
     const userMenu = [
@@ -126,8 +147,9 @@ function Header() {
         {
             icon: <FontAwesomeIcon icon={faSignOut} />,
             title: 'Log out',
-            to: '/logout',
+            // to: '/logout',
             separate: true,
+            type: 'logout',
         },
     ]
 
@@ -158,12 +180,12 @@ function Header() {
                         </>
                     ) : (
                         <Fragment>
-                            <Button primary onClick={handleOpenModal}>
+                            <Button primary onClick={handleOpenModalLogin}>
                                 Log in
                             </Button>
                         </Fragment>
                     )}
-                    <Menu items={currentUser ? userMenu : MENU_ITEMS} onClick={handleMenuClick}>
+                    <Menu items={!currentUser ? userMenu : MENU_ITEMS} onClick={handleMenuClick}>
                         {currentUser ? (
                             <Image
                                 className={cx('user-avatar')}
@@ -179,11 +201,29 @@ function Header() {
                     </Menu>
                 </div>
                 <ReactModal
-                    isOpen={isModalOpen}
+                    isOpen={isModalLoginOpen}
+                    contentLabel="Log in to TikTok"
                     className={cx('modal')}
                     overlayClassName={cx('overlay')}
                 >
-                    <LogIn onClick={handleCloseModal} />
+                    <LogIn
+                        onClick={handleCloseModalLogin}
+                        onClickUserName={hanldeOnClickUserName}
+                    />
+                </ReactModal>
+                <ReactModal
+                    isOpen={isModalLogoutOpen}
+                    contentLabel="Logout confirmation"
+                    className={cx('modal')}
+                    overlayClassName={'overlay'}
+                >
+                    <div className={cx('logout-confirm-container')}>
+                        <div>Are you sure you want to log out?</div>
+                        <div className={cx('button-wrapper')}>
+                            <Button text>Cancel</Button>
+                            <Button outline>Log out</Button>
+                        </div>
+                    </div>
                 </ReactModal>
             </div>
         </header>

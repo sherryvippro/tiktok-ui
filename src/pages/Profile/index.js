@@ -1,9 +1,7 @@
-import LogIn from '~/components/LogIn/LogIn'
-
 function Profile() {
     return (
         <div>
-            <LogIn />
+            <h1>Profile</h1>
         </div>
     )
 }

@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 
 const cx = classNames.bind(style)
 
-function LogIn({ onClick }) {
+function LogIn({ onClick, onClickUserName }) {
     return (
         <div className={cx('center-wrapper')}>
             <div className={cx('wrapper')}>
@@ -25,7 +25,7 @@ function LogIn({ onClick }) {
                                 </div>
                                 <div className={cx('text')}>Use QR Code</div>
                             </div>
-                            <div className={cx('container')}>
+                            <div className={cx('container')} onClick={onClickUserName}>
                                 <div className={cx('icon')}>
                                     <FontAwesomeIcon icon={faQrcode} />
                                 </div>

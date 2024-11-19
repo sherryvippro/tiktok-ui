@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind'
 import styles from './Content.module.scss'
-import Video from '~/components/SectionVideo/SectionVideo'
-import SectionButton from '~/components/SectionButton/SectionButton'
+import Tippy from '@tippyjs/react/headless'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
     faBookmark,
@@ -13,6 +13,10 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { avatar } from '~/assets/images'
 import { useState } from 'react'
+
+import Video from '~/components/SectionVideo/SectionVideo'
+import SectionButton from '~/components/SectionButton/SectionButton'
+import ShareMenu from './ShareMenu'
 
 const cx = classNames.bind(styles)
 
@@ -37,6 +41,8 @@ function Content({ followed = false, isMuted, toggleMute }) {
     const handleOnClickFavoriteButton = () => {
         setFavorite((prev) => !prev)
     }
+
+    const hanldeMoreOnClick = () => {}
 
     return (
         <div className={cx('wrapper')}>
@@ -110,7 +116,15 @@ function Content({ followed = false, isMuted, toggleMute }) {
                         1296
                     </SectionButton>
                 )}
-                <SectionButton icon={<FontAwesomeIcon icon={faShare} />}>50.4K</SectionButton>
+
+                <Tippy
+                    interactive
+                    render={() => <ShareMenu hanldeMoreOnClick={hanldeMoreOnClick} />}
+                    placement="bottom-start"
+                    offset={[-5, 20]}
+                >
+                    <SectionButton icon={<FontAwesomeIcon icon={faShare} />}>50.4K</SectionButton>
+                </Tippy>
             </div>
         </div>
     )
